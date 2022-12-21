@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: ceragem-crm-batch
-
-  batch:
-    job:
-      names: ${job.name:NONE}
-
