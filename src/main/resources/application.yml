@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ceragem-crm-batch
+    name: kspo-voc-batch
 
   batch:
     job:

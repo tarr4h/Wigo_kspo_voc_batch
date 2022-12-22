@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @description	
  * @Company		Copyright ⓒ wigo.ai. All Right Reserved
  */
-@ComponentScan("com.ceragem")
+@ComponentScan("com.kspo")
 @EnableBatchProcessing
 @SpringBootApplication
 //(exclude = { DataSourceAutoConfiguration.class })

@@ -32,7 +32,7 @@ public class BatchExecHstService extends AbstractVocService {
 	public int insert(Object param) throws Exception {
 		int ret = super.insert(param);
 		BatchExecHstVo vo = (BatchExecHstVo) param;
-		if (Utilities.isNotEmpty(vo.getBatchCd()))
+		if (Utilities.isNotEmpty(vo.getBatchId()))
 			updateBatch(param);
 		return ret;
 	}

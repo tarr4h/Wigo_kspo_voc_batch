@@ -28,7 +28,7 @@
 
 
     <logger name="org.springframework" level="INFO" additivity="true" />
-    <logger name="egovframework" level="DEBUG" additivity="true" />
+    <logger name="egovframework" level="INFO" additivity="true" />
 
 
     

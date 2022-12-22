@@ -27,7 +27,7 @@ public class BatchInfoBasVo extends BaseVo {
 	/**
 	 * 배치코드
 	 */
-	private String batchCd;
+	private String batchId;
 	/**
 	 * 시스템코드
 	 */

@@ -12,7 +12,9 @@ spring:
     url: jdbc:log4jdbc:oracle:thin:@s3.moara.org:6030/orcl
     username: wigoVoc
     password: wigoVoc
-    
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor       
 # Log
 logging:
   config: classpath:logback-dev.xml

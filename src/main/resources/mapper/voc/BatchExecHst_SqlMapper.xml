@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ceragem.batch.crm.dao.BatchExecHstDao">
+<mapper namespace="com.kspo.voc.batch.dao.BatchExecHstDao">
     <sql id="sqlPkConditions">
-                WHERE BATCH_HST_CD      =       #{batchHstCd}
+                WHERE BATCH_HST_ID      =       #{batchHstId}
     </sql>
     <sql id="sqlCols">
-                      BATCH_HST_CD                    /*배치이력코드        */
-                    , BATCH_CD                    /*배치코드        */
+                      BATCH_HST_ID                    /*배치이력ID        */
+                    , BATCH_ID                    /*배치ID        */
                     , SYS_CD                    /*시스템코드        */
                     , WRK_ID                    /*작업ID        */
                     , BATCH_RSLT_CD                    /*배치결과코드        */
@@ -20,20 +20,20 @@
     </sql>
     
     <insert id="insert">
-        <selectKey order="BEFORE" keyProperty="batchCd" resultType="String">
-           SELECT ( SELECT BATCH_CD
-                      FROM BATCH_INFO_BAS
-                     WHERE SYS_CD = 'CRM'
+        <selectKey order="BEFORE" keyProperty="batchId" resultType="String">
+           SELECT ( SELECT BATCH_ID
+                      FROM TB_SYS_BATCH_INFO_BAS
+                     WHERE SYS_CD = 'VOC'
                        AND WRK_ID = #{wrkId}
                        AND ROWNUM = 1)
              FROM DUAL
         </selectKey>
         
-                INSERT /* com.ceragem.batch.crm.dao.BatchExecHstDao.insert */ INTO BATCH_EXEC_HST (
+                INSERT /* com.kspo.voc.batch.dao.BatchExecHstDao.insert */ INTO TB_SYS_BATCH_EXEC_HST (
         <include refid="sqlCols"/>
                  ) VALUES (
-                       FN_CRM_AUTO_SEQ('BEH')
-                     , #{batchCd}
+                       FN_VOC_AUTO_SEQ('BEH')
+                     , #{batchId}
                      , #{regrId}
                      , #{wrkId}
                      , #{batchRsltCd}
@@ -47,14 +47,14 @@
                  )
     </insert>
     <update id="updateBatch">
-            UPDATE /* com.ceragem.batch.crm.dao.BatchExecHstDao.updateBatch */ BATCH_INFO_BAS 
+            UPDATE /* com.kspo.voc.batch.dao.BatchExecHstDao.updateBatch */ TB_SYS_BATCH_INFO_BAS 
                SET LAST_EXEC_DT = DECODE( #{batchRsltCd},'Y',TO_DATE(#{batchCallDt},'YYYYMMDDHH24MISS'), LAST_EXEC_DT)
                  , AMD_DT = TO_DATE(#{batchCallDt},'YYYYMMDDHH24MISS')
                  , LAST_SUCC_YN = #{batchRsltCd}
-             WHERE BATCH_CD =  #{batchCd}
+             WHERE BATCH_ID =  #{batchId}
     </update>
-    <select id="selectBatchInfo" resultType="com.ceragem.batch.crm.model.BatchInfoBasVo">
-               SELECT /* com.ceragem.batch.crm.dao.BatchExecHstDao.selectBatch */A.BATCH_CD                    /*배치코드        */
+    <select id="selectBatchInfo" resultType="com.kspo.voc.batch.model.BatchInfoBasVo">
+               SELECT /* com.kspo.voc.batch.dao.BatchExecHstDao.selectBatch */A.BATCH_ID                    /*배치코드        */
                     , A.SYS_CD                    /*시스템코드        */
                     , A.BATCH_NM                    /*배치명        */
                     , A.WRK_ID                    /*작업ID        */
@@ -65,8 +65,8 @@
                     , TO_CHAR(A.REG_DT,'YYYYMMDDHH24MISS')    REG_DT                    /*등록일시        */
                     , A.AMDR_ID                    /*수정자ID        */
                     , TO_CHAR(A.AMD_DT,'YYYYMMDDHH24MISS')    AMD_DT                    /*수정일시        */
-                 FROM BATCH_INFO_BAS A
-                WHERE A.SYS_CD = 'CRM'
+                 FROM TB_SYS_BATCH_INFO_BAS A
+                WHERE A.SYS_CD = 'VOC'
                   AND A.WRK_ID = #{wrkId}
 <!--                   AND A.USE_YN = 'Y' -->
                   AND ROWNUM = 1

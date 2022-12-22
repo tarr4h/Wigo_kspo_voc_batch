@@ -13,10 +13,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.kspo.voc.batch.common.util.VocSqlLogger;
 import com.kspo.voc.batch.mapper.CrmMapper;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  *
@@ -60,28 +61,28 @@ class VocDatabaseConfig {
 	@Primary
 	@Bean(name = "vocDataSource")
 	DataSource dataSource() {
-    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(dbDriverClassName);
-    dataSource.setUrl(dbURL);
-    dataSource.setUsername(userName);
-    dataSource.setPassword(password);
-    return dataSource;
+//    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//    dataSource.setDriverClassName(dbDriverClassName);
+//    dataSource.setUrl(dbURL);
+//    dataSource.setUsername(userName);
+//    dataSource.setPassword(password);
+//    return dataSource;
 //
 ////    return dataSource;
-//		if (poolSize <= 0)
-//			poolSize = 10;
-//		if (timeout <= 0)
-//			timeout = 60000;
-//		HikariConfig hikariConfig = new HikariConfig();
-//		hikariConfig.setDriverClassName(dbDriverClassName);
-//		hikariConfig.setUsername(userName);
-//		hikariConfig.setPassword(password);
-//		hikariConfig.setJdbcUrl(dbURL);
-//		hikariConfig.setMaximumPoolSize(poolSize);
-//		hikariConfig.setConnectionTimeout(timeout);
-//		hikariConfig.setLeakDetectionThreshold(30000);
-//		hikariConfig.setPoolName("cragem-voc-batch-pool");
-//		return new HikariDataSource(hikariConfig);
+		if (poolSize <= 0)
+			poolSize = 10;
+		if (timeout <= 0)
+			timeout = 60000;
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setDriverClassName(dbDriverClassName);
+		hikariConfig.setUsername(userName);
+		hikariConfig.setPassword(password);
+		hikariConfig.setJdbcUrl(dbURL);
+		hikariConfig.setMaximumPoolSize(poolSize);
+		hikariConfig.setConnectionTimeout(timeout);
+		hikariConfig.setLeakDetectionThreshold(30000);
+		hikariConfig.setPoolName("voc-batch-pool");
+		return new HikariDataSource(hikariConfig);
 	}
 
 	@Primary

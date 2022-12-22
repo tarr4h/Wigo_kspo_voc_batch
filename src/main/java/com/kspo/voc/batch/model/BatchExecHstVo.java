@@ -22,11 +22,11 @@ private static final long serialVersionUID = 1L;
     /**
     * 배치이력코드 
     */
-    private String batchHstCd;
+    private String batchHstId;
     /**
     * 배치코드 
     */
-    private String batchCd;
+    private String batchId;
     /**
     * 시스템코드 
     */

@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class VocobListener implements JobExecutionListener {
+public class VocJobListener implements JobExecutionListener {
 	@Autowired
 	BatchExecHstService service;
 	private final static SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREAN);
@@ -96,7 +96,7 @@ public class VocobListener implements JobExecutionListener {
 
 		log.warn(
 				"#####################################################################################################");
-		log.warn("                               " + batchInfo.getBatchNm() + " : " + jobName + " end");
+		log.warn("                               " +(batchInfo !=null ?  batchInfo.getBatchNm() : "no job") + " : " + jobName + " end");
 		log.warn(
 				"#####################################################################################################");
 	}
