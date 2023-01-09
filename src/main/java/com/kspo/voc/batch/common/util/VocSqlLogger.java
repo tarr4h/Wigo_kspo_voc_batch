@@ -21,10 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <pre>
- * com.ceragem.batch.crm.common.util - CrmSqlLogger.java
+ * com.kspo.voc.batch.common.util - VocSqlLogger.java
  * </pre>
  *
- * @ClassName : CrmSqlLogger
+ * @ClassName : VocSqlLogger
  * @Description : sql log
  * @author : 김성태
  * @date : 2021. 4. 23.

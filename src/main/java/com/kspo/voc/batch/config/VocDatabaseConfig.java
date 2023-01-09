@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import com.kspo.voc.batch.common.util.VocSqlLogger;
-import com.kspo.voc.batch.mapper.CrmMapper;
+import com.kspo.voc.batch.mapper.VocMapper;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -35,7 +35,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Primary
 @Configuration("vocDatabaseConfig")
 @MapperScan(basePackages = {
-		"com.kspo.voc.batch.dao" }, value = "최상위 패키지 경로", annotationClass = CrmMapper.class, sqlSessionFactoryRef = "vocSqlSessionFactory")
+		"com.kspo.voc.batch.dao" }, value = "최상위 패키지 경로", annotationClass = VocMapper.class, sqlSessionFactoryRef = "vocSqlSessionFactory")
 class VocDatabaseConfig {
 	@Autowired
 	ApplicationContext applicationContext;

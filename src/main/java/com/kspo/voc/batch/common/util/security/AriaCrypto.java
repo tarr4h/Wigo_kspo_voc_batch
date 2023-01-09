@@ -5,7 +5,7 @@ import java.security.InvalidKeyException;
 /**
  * 
  * <pre>
- * com.ceragem.crm.common.util.security - ARIA.java
+ * com.kspo.voc.batch.common.util.security - ARIA.java
  * </pre>
  *
  * @ClassName : ARIA

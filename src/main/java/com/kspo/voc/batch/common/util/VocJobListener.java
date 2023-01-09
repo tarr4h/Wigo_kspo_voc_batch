@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
- * @ClassName CrmJobListener
+ * @ClassName VocJobListener
  * @author 김성태
  * @date 2022. 10. 5.
  * @Version 1.0

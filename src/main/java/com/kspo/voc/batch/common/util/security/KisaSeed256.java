@@ -14,7 +14,7 @@ package com.kspo.voc.batch.common.util.security;
 /**
  * 
  * <pre>
- * com.ceragem.crm.common.util.security - KisaSeed256.java
+ * com.kspo.voc.batch.common.util.security - KisaSeed256.java
  * </pre>
  *
  * @ClassName : KisaSeed256

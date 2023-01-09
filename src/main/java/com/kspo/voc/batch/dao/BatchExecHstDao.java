@@ -1,9 +1,9 @@
 package com.kspo.voc.batch.dao;
 
-import com.kspo.voc.batch.mapper.CrmMapper;
+import com.kspo.voc.batch.mapper.VocMapper;
 import com.kspo.voc.batch.model.BatchInfoBasVo;
 
-@CrmMapper
+@VocMapper
 public interface BatchExecHstDao extends IVocDao {
 
 	int updateBatch(Object param) throws Exception;

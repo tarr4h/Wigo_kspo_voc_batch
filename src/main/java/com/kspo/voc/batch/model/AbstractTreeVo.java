@@ -11,7 +11,7 @@ import com.kspo.voc.batch.common.util.Utilities;
 /**
  * 
  * <pre>
- * com.ceragem.crm.common.model - AbstractTreeVo.java
+ * com.kspo.voc.batch.common.model - AbstractTreeVo.java
  * </pre>
  *
  * @ClassName : AbstractTreeVo

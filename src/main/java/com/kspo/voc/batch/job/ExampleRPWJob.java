@@ -39,8 +39,8 @@ public class ExampleRPWJob {
 
 	@Bean("stepExample")
 	Step stepExample() {
-		log.debug("stepCrmCustomer");
-		return stepBuilderFactory.get("stepCrmCustomer").<Object, Object>chunk(Constants.FETCH_COUNT)
+		log.debug("stepVocCustomer");
+		return stepBuilderFactory.get("stepVocCustomer").<Object, Object>chunk(Constants.FETCH_COUNT)
 				.reader(readerExample()).writer(writerExample()).build();
 	}
 

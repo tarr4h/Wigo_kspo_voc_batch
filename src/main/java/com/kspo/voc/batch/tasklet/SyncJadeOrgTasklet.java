@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SyncJadeOrgTasklet implements Tasklet {
 	
 //	@Autowired
-//	CrmOrgBaseService orgService;
+//	OrgBaseService orgService;
 	
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {

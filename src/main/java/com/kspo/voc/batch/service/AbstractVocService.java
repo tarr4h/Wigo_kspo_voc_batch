@@ -10,11 +10,11 @@ import com.kspo.voc.batch.model.BaseVo;
 
 /**
  * <pre>
- * com.ceragem.crm.common.service.AbstractCrmService
+ * com.kspo.voc.batch.common.service.AbstractVocService
  * </pre>
  *
- * @ClassName : AbstractCrmService
- * @Description : AbstractCrmService
+ * @ClassName : AbstractVocService
+ * @Description : AbstractVocService
  * @author : 김성태
  * @date : 2021. 4. 27.
  * @Version : 1.0

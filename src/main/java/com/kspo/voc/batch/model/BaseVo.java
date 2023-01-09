@@ -10,7 +10,7 @@ import lombok.Data;
 /**
  * 
  * <pre>
- * com.ceragem.crm.common.model - BaseBo.java
+ * com.kspo.voc.batch.common.model - BaseBo.java
  * </pre>
  *
  * @ClassName : BaseBo
@@ -29,9 +29,9 @@ public class BaseVo implements Serializable {
 	private static final long serialVersionUID = -4361056844282850052L;
 	private String stat;
 	private String peerIp;
-	private String regrId = "CRM";
+	private String regrId = "VOC";
 	private String regDt;
-	private String amdrId = "CRM";
+	private String amdrId = "VOC";
 	private String amdDt;
 
 	public BaseVo() {

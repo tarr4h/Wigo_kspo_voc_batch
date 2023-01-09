@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 
 * <pre>
-* com.ceragem.crm.common.model
+* com.kspo.voc.batch.common.model
 *	- ITreeVo.java
 * </pre>
 *
