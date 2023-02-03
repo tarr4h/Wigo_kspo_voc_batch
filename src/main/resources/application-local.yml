@@ -18,3 +18,19 @@ jasypt:
 # Log
 logging:
   config: classpath:logback-local.xml
+
+dispatch:
+  messenger:
+#    url: http://140.101.1.131:8089/notify/sendNotify.jsp
+    url: http://140.101.1.120/messenger/ConNotify.asp
+    method: GET
+  sms:
+    url: http://jupiter.kspo.or.kr/UFWeb/public/sendSms.jsp
+    method: POST
+  email:
+    url: http://211.33.182.29:8080/servlet/servletAPI.ThunderAPIServlet
+    sender: vocadmin@kspo.com
+    sender-name: 체육진흥공단
+    method: POST
+    
+  
