@@ -1,8 +1,37 @@
+# Spring Configure
 spring:
-  application:
-    name: kspo-voc-batch
-
   batch:
-    job:
-      names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: NEVER
+  
+  datasource:
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 10
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:oracle:thin:@s3.moara.org:6030/orcl
+    username: wigoVoc
+    password: wigoVoc
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor       
+# Log
+logging:
+  config: classpath:logback-prod.xml
 
+dispatch:
+  messenger:
+#    url: http://140.101.1.131:8089/notify/sendNotify.jsp
+    url: http://140.101.1.120/messenger/ConNotify.asp
+    method: GET
+    encoding: EUC-KR
+  sms:
+    url: http://jupiter.kspo.or.kr/UFWeb/public/sendSms.jsp
+    method: POST
+    encoding: EUC-KR
+  email:
+    url: http://211.33.182.29:8080/servlet/servletAPI.ThunderAPIServlet
+    sender: vocadmin@kspo.com
+    sender-name: 체육진흥공단
+    method: POST
+    encoding: EUC-KR
