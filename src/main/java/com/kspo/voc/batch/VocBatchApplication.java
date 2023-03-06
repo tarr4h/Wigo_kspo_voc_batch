@@ -3,7 +3,7 @@ package com.kspo.voc.batch;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan;    
 /**
  * 
  * @ClassName	CeragemBatchApplication
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @description	
  * @Company		Copyright ⓒ wigo.ai. All Right Reserved
  */
-@ComponentScan("com.kspo")
+@ComponentScan("com.kspo.voc.batch")
 @EnableBatchProcessing
 @SpringBootApplication
 //(exclude = { DataSourceAutoConfiguration.class })

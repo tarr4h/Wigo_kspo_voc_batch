@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kspo.voc.batch.dao.OrgBasDao">
+    <sql id="sqlPkConditions">
+                WHERE ORG_ID            =       #{orgId}
+    </sql>
+    <sql id="sqlCols">
+                      ORG_ID                    /*조직ID        */
+                    , ORG_NM                    /*조직명        */
+                    , ORG_CLASS_ID                    /*조직분류ID        */
+                    , ORG_CLASS_NM                    /*조직분류명        */
+                    , LVL_NO                    /*레벨번호        */
+                    , ORG_ODRG                    /*조직순번        */
+                    , UP_ORG_ID                    /*상위조직ID        */
+                    , UP_ORG_NM                    /*상위조직명        */
+                    , ORG_EMP_ID                    /*조직사원ID        */
+                    , ORG_EMP_NM                    /*조직사원명        */
+                    , STA_YMD                    /*시작년월일        */
+                    , END_YMD                    /*종료년월일        */
+                    , REGR_ID                    /*등록자ID        */
+                    , REG_DT                    /*등록일시        */
+                    , AMDR_ID                    /*수정자ID        */
+                    , AMD_DT                    /*수정일시        */
+    </sql>
+    <sql id="sqlSelectCols">
+                      A.ORG_ID                    /*조직ID        */
+                    , A.ORG_NM                    /*조직명        */
+                    , A.ORG_CLASS_ID                    /*조직분류ID        */
+                    , A.ORG_CLASS_NM                    /*조직분류명        */
+                    , A.LVL_NO                    /*레벨번호        */
+                    , A.ORG_ODRG                    /*조직순번        */
+                    , A.UP_ORG_ID                    /*상위조직ID        */
+                    , A.UP_ORG_NM                    /*상위조직명        */
+                    , A.ORG_EMP_ID                    /*조직사원ID        */
+                    , A.ORG_EMP_NM                    /*조직사원명        */
+                    , A.STA_YMD                    /*시작년월일        */
+                    , A.END_YMD                    /*종료년월일        */
+                    , A.REGR_ID                    /*등록자ID        */
+                    , TO_CHAR(A.REG_DT,'YYYYMMDDHH24MISS')    REG_DT                    /*등록일시        */
+                    , A.AMDR_ID                    /*수정자ID        */
+                    , TO_CHAR(A.AMD_DT,'YYYYMMDDHH24MISS')    AMD_DT                    /*수정일시        */
+    </sql>
+    <sql id="sqlConditions">
+        <where>
+            <if test="orgId != null and orgId != ''">
+                      AND A.ORG_ID          =       #{orgId}
+            </if>
+            <if test="orgNm != null and orgNm != ''">
+                      AND A.ORG_NM          =       #{orgNm}
+            </if>
+            <if test="orgClassId != null and orgClassId != ''">
+                      AND A.ORG_CLASS_ID    =       #{orgClassId}
+            </if>
+            <if test="orgClassNm != null and orgClassNm != ''">
+                      AND A.ORG_CLASS_NM    =       #{orgClassNm}
+            </if>
+            <if test="lvlNo != null and lvlNo != ''">
+                      AND A.LVL_NO          =       #{lvlNo}
+            </if>
+            <if test="orgOdrg != null and orgOdrg != ''">
+                      AND A.ORG_ODRG        =       #{orgOdrg}
+            </if>
+            <if test="upOrgId != null and upOrgId != ''">
+                      AND A.UP_ORG_ID       =       #{upOrgId}
+            </if>
+            <if test="upOrgNm != null and upOrgNm != ''">
+                      AND A.UP_ORG_NM       =       #{upOrgNm}
+            </if>
+            <if test="orgEmpId != null and orgEmpId != ''">
+                      AND A.ORG_EMP_ID      =       #{orgEmpId}
+            </if>
+            <if test="orgEmpNm != null and orgEmpNm != ''">
+                      AND A.ORG_EMP_NM      =       #{orgEmpNm}
+            </if>
+            <if test="staYmd != null and staYmd != ''">
+                      AND A.STA_YMD         =       #{staYmd}
+            </if>
+            <if test="endYmd != null and endYmd != ''">
+                      AND A.END_YMD         =       #{endYmd}
+            </if>
+        </where>
+    </sql>
+    <sql id="sqlOrderBy">
+        <choose>
+            <when test="colSortName ==null or colSortName == ''">
+                ORDER BY      REG_DT DESC
+            </when>
+            <when test="colSortName.equals('orgId')">
+                ORDER BY      ORG_ID
+            </when>
+            <when test="colSortName.equals('orgNm')">
+                ORDER BY      ORG_NM
+            </when>
+            <when test="colSortName.equals('orgClassId')">
+                ORDER BY      ORG_CLASS_ID
+            </when>
+            <when test="colSortName.equals('orgClassNm')">
+                ORDER BY      ORG_CLASS_NM
+            </when>
+            <when test="colSortName.equals('lvlNo')">
+                ORDER BY      LVL_NO
+            </when>
+            <when test="colSortName.equals('orgOdrg')">
+                ORDER BY      ORG_ODRG
+            </when>
+            <when test="colSortName.equals('upOrgId')">
+                ORDER BY      UP_ORG_ID
+            </when>
+            <when test="colSortName.equals('upOrgNm')">
+                ORDER BY      UP_ORG_NM
+            </when>
+            <when test="colSortName.equals('orgEmpId')">
+                ORDER BY      ORG_EMP_ID
+            </when>
+            <when test="colSortName.equals('orgEmpNm')">
+                ORDER BY      ORG_EMP_NM
+            </when>
+            <when test="colSortName.equals('staYmd')">
+                ORDER BY      STA_YMD
+            </when>
+            <when test="colSortName.equals('endYmd')">
+                ORDER BY      END_YMD
+            </when>
+            <when test="colSortName.equals('regrId')">
+                ORDER BY      REGR_ID
+            </when>
+            <when test="colSortName.equals('regDt')">
+                ORDER BY      REG_DT
+            </when>
+            <when test="colSortName.equals('amdrId')">
+                ORDER BY      AMDR_ID
+            </when>
+            <when test="colSortName.equals('amdDt')">
+                ORDER BY      AMD_DT
+            </when>
+            <otherwise>
+                ORDER BY      REG_DT
+            </otherwise>
+        </choose>
+        <if test="colSortName !=null and colSortDir !='' and colSortDir !=null and colSortDir !='' and colSortDir.equals('desc')">
+            DESC
+        </if>
+    </sql>
+    <select id="selectListCount" resultType="int">
+                SELECT /* com.kspo.voc.batch.dao.OrgBasDao.selectListCount */ COUNT(1)
+                 FROM TB_SYS_ORG_BAS A
+        <include refid="sqlConditions"/>
+    </select>
+    <select id="selectList" resultType="com.kspo.voc.batch.model.OrgBasVo">
+               SELECT /* com.kspo.voc.batch.dao.OrgBasDao.selectList */ <include refid="sqlSelectCols"/>
+                 FROM TB_SYS_ORG_BAS A
+        <include refid="sqlConditions"/>
+               ORDER BY ORG_ID
+    </select>
+    <select id="select" resultType="com.kspo.voc.batch.model.OrgBasVo">
+               SELECT /* com.kspo.voc.batch.dao.OrgBasDao.select */ <include refid="sqlSelectCols"/>
+                 FROM TB_SYS_ORG_BAS A
+        <include refid="sqlPkConditions"/>
+    </select>
+    <insert id="insert">
+                INSERT /* com.kspo.voc.batch.dao.OrgBasDao.insert */ INTO TB_SYS_ORG_BAS (
+        <include refid="sqlCols"/>
+                 ) VALUES (
+                       #{orgId}
+                     , #{orgNm}
+                     , #{orgClassId}
+                     , #{orgClassNm}
+                     , #{lvlNo}
+                     , #{orgOdrg}
+                     , #{upOrgId}
+                     , #{upOrgNm}
+                     , #{orgEmpId}
+                     , #{orgEmpNm}
+                     , #{staYmd}
+                     , #{endYmd}
+                     , #{regrId}
+                     , SYSDATE
+                     , #{amdrId}
+                     , SYSDATE
+                 )
+    </insert>
+    <update id="update">
+               UPDATE /* com.kspo.voc.batch.dao.OrgBasDao.update */ TB_SYS_ORG_BAS
+                  SET ORG_NM                                  =         #{orgNm}
+                    , ORG_CLASS_ID                            =         #{orgClassId}
+                    , ORG_CLASS_NM                            =         #{orgClassNm}
+                    , LVL_NO                                  =         #{lvlNo}
+                    , ORG_ODRG                                =         #{orgOdrg}
+                    , UP_ORG_ID                               =         #{upOrgId}
+                    , UP_ORG_NM                               =         #{upOrgNm}
+                    , ORG_EMP_ID                              =         #{orgEmpId}
+                    , ORG_EMP_NM                              =         #{orgEmpNm}
+                    , STA_YMD                                 =         #{staYmd}
+                    , END_YMD                                 =         #{endYmd}
+                    , AMDR_ID                                 =         #{amdrId}
+                    , AMD_DT                                  =         SYSDATE
+        <include refid="sqlPkConditions"/>
+    </update>
+    <delete id="delete">
+               DELETE /* com.kspo.voc.batch.dao.OrgBasDao.delete */
+                 FROM TB_SYS_ORG_BAS
+        <include refid="sqlPkConditions"/>
+    </delete>
+    <delete id="deleteNotTmp">
+               DELETE /* com.kspo.voc.batch.dao.OrgBasDao.delete */
+                 FROM TB_SYS_ORG_BAS
+                WHERE ORG_ID NOT IN ( SELECT BUSECD FROM TMP_CODE_002 )
+                  AND ( SELECT COUNT(1) CNT FROM TMP_CODE_002) > 0
+    </delete>
+    <select id="selectTmpList" resultType="com.kspo.voc.batch.model.OrgBasVo">
+               SELECT A.INPUT_YMD REG_DT                    /*입력일자        */
+                    , A.BUSECD ORG_ID                    /*부서코드        */
+                    , A.DEPT_NAME    ORG_NM                /*부서명        */
+                    , A.GROUP_INDENT    LVL_NO                /*부서레벨        */
+                    , A.GROUP_PARENT    UP_ORG_ID                /*상급부서        */
+                    , A.GROUP_ORDER ORG_ODRG
+                    , B.DEPT_NAME   UP_ORG_NM 
+                    , A.PROC_STATUS     ORG_CLASS_ID               /*처리상태        */
+                    , A.YMD_OPEN_DEPT    STA_YMD                /*부서개설일        */
+                    , NVL(A.YMD_CLOSE_DEPT,'99991231')   END_YMD                 /*부서폐쇠일        */
+                    , A.FG_STATUS_NOW                    /*현재상태유형        */
+                    , DECODE(C.ORG_ID,NULL,'N','U') STAT
+                 FROM TMP_CODE_002 A 
+                 LEFT JOIN TMP_CODE_002 B ON A.GROUP_PARENT = B.BUSECD 
+                 LEFT JOIN TB_SYS_ORG_BAS C ON A.BUSECD = C.ORG_ID
+                ORDER BY A.BUSECD
+    </select>
+    <select id="selectTmpListCount" resultType="int">
+               SELECT COUNT(1) CNT
+                 FROM TMP_CODE_002 A
+    </select>
+</mapper>

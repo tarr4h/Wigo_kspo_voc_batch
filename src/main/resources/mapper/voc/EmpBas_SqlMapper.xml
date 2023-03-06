@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kspo.voc.batch.dao.EmpBasDao">
+    <sql id="sqlPkConditions">
+                WHERE EMP_ORG_ID        =       #{empOrgId}
+    </sql>
+    <sql id="sqlCols">
+                      EMP_ORG_ID                    /*직원부서ID        */
+                    , EMP_ID                    /*사원ID        */
+                    , ORG_ID                    /*조직ID        */
+                    , CNCRT_YN                    /*결직여부        */
+                    , EMP_NM                    /*사원명        */
+                    , CMP_CD                    /*회사코드        */
+                    , JOB_ID                    /*직업ID        */
+                    , DUTY_CD                    /*직무코드        */
+                    , TEL_NO                    /*전화번호        */
+                    , EMP_GRADE_CD                    /*사원등급코드        */
+                    , BIRTHDAY                    /*생년월일        */
+                    , EMAIL_ADDR                    /*이메일주소        */
+                    , STATUS_CD                    /*상태코드        */
+                    , ENCO_YMD                    /*입사년월일        */
+                    , RETIRE_YMD                    /*퇴사년월일        */
+                    , EMP_TYPE_CD                    /*사원유형코드        */
+                    , MPHON_NO                    /*이동전화번호        */
+                    , REGR_ID                    /*등록자ID        */
+                    , REG_DT                    /*등록일시        */
+                    , AMDR_ID                    /*수정자ID        */
+                    , AMD_DT                    /*수정일시        */
+    </sql>
+    <sql id="sqlSelectCols">
+                      A.EMP_ORG_ID                    /*직원부서ID        */
+                    , A.EMP_ID                    /*사원ID        */
+                    , A.ORG_ID                    /*조직ID        */
+                    , A.CNCRT_YN                    /*결직여부        */
+                    , A.EMP_NM                    /*사원명        */
+                    , A.CMP_CD                    /*회사코드        */
+                    , A.JOB_ID                    /*직업ID        */
+                    , A.DUTY_CD                    /*직무코드        */
+                    , A.TEL_NO                    /*전화번호        */
+                    , A.EMP_GRADE_CD                    /*사원등급코드        */
+                    , A.BIRTHDAY                    /*생년월일        */
+                    , A.EMAIL_ADDR                    /*이메일주소        */
+                    , A.STATUS_CD                    /*상태코드        */
+                    , A.ENCO_YMD                    /*입사년월일        */
+                    , A.RETIRE_YMD                    /*퇴사년월일        */
+                    , A.EMP_TYPE_CD                    /*사원유형코드        */
+                    , A.MPHON_NO                    /*이동전화번호        */
+                    , A.REGR_ID                    /*등록자ID        */
+                    , TO_CHAR(A.REG_DT,'YYYYMMDDHH24MISS')    REG_DT                    /*등록일시        */
+                    , A.AMDR_ID                    /*수정자ID        */
+                    , TO_CHAR(A.AMD_DT,'YYYYMMDDHH24MISS')    AMD_DT                    /*수정일시        */
+    </sql>
+    <sql id="sqlConditions">
+        <where>
+            <if test="empOrgId != null and empOrgId != ''">
+                      AND A.EMP_ORG_ID      =       #{empOrgId}
+            </if>
+            <if test="empId != null and empId != ''">
+                      AND A.EMP_ID          =       #{empId}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                      AND A.ORG_ID          =       #{orgId}
+            </if>
+            <if test="cncrtYn != null and cncrtYn != ''">
+                      AND A.CNCRT_YN        =       #{cncrtYn}
+            </if>
+            <if test="empNm != null and empNm != ''">
+                      AND A.EMP_NM          =       #{empNm}
+            </if>
+            <if test="cmpCd != null ">
+                <choose>
+                    <when test="cmpCd instanceof String">
+                        <if test="cmpCd !=''">
+                            AND A.CMP_CD          =       #{cmpCd}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND A.CMP_CD          IN
+                        <foreach item="item" index="index" collection="cmpCd" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="jobId != null and jobId != ''">
+                      AND A.JOB_ID          =       #{jobId}
+            </if>
+            <if test="dutyCd != null ">
+                <choose>
+                    <when test="dutyCd instanceof String">
+                        <if test="dutyCd !=''">
+                            AND A.DUTY_CD         =       #{dutyCd}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND A.DUTY_CD         IN
+                        <foreach item="item" index="index" collection="dutyCd" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="telNo != null and telNo != ''">
+                      AND A.TEL_NO          =       #{telNo}
+            </if>
+            <if test="empGradeCd != null ">
+                <choose>
+                    <when test="empGradeCd instanceof String">
+                        <if test="empGradeCd !=''">
+                            AND A.EMP_GRADE_CD    =       #{empGradeCd}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND A.EMP_GRADE_CD    IN
+                        <foreach item="item" index="index" collection="empGradeCd" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="birthday != null and birthday != ''">
+                      AND A.BIRTHDAY        =       #{birthday}
+            </if>
+            <if test="emailAddr != null and emailAddr != ''">
+                      AND A.EMAIL_ADDR      =       #{emailAddr}
+            </if>
+            <if test="statusCd != null ">
+                <choose>
+                    <when test="statusCd instanceof String">
+                        <if test="statusCd !=''">
+                            AND A.STATUS_CD       =       #{statusCd}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND A.STATUS_CD       IN
+                        <foreach item="item" index="index" collection="statusCd" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="encoYmd != null and encoYmd != ''">
+                      AND A.ENCO_YMD        =       #{encoYmd}
+            </if>
+            <if test="retireYmd != null and retireYmd != ''">
+                      AND A.RETIRE_YMD      =       #{retireYmd}
+            </if>
+            <if test="empTypeCd != null ">
+                <choose>
+                    <when test="empTypeCd instanceof String">
+                        <if test="empTypeCd !=''">
+                            AND A.EMP_TYPE_CD     =       #{empTypeCd}
+                        </if>
+                    </when>
+                    <otherwise>
+                        AND A.EMP_TYPE_CD     IN
+                        <foreach item="item" index="index" collection="empTypeCd" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="mphonNo != null and mphonNo != ''">
+                      AND A.MPHON_NO        =       #{mphonNo}
+            </if>
+        </where>
+    </sql>
+    <sql id="sqlOrderBy">
+        <choose>
+            <when test="colSortName ==null or colSortName == ''">
+                ORDER BY      REG_DT DESC
+            </when>
+            <when test="colSortName.equals('empOrgId')">
+                ORDER BY      EMP_ORG_ID
+            </when>
+            <when test="colSortName.equals('empId')">
+                ORDER BY      EMP_ID
+            </when>
+            <when test="colSortName.equals('orgId')">
+                ORDER BY      ORG_ID
+            </when>
+            <when test="colSortName.equals('cncrtYn')">
+                ORDER BY      CNCRT_YN
+            </when>
+            <when test="colSortName.equals('empNm')">
+                ORDER BY      EMP_NM
+            </when>
+            <when test="colSortName.equals('cmpCd')">
+                ORDER BY      CMP_CD
+            </when>
+            <when test="colSortName.equals('jobId')">
+                ORDER BY      JOB_ID
+            </when>
+            <when test="colSortName.equals('dutyCd')">
+                ORDER BY      DUTY_CD
+            </when>
+            <when test="colSortName.equals('telNo')">
+                ORDER BY      TEL_NO
+            </when>
+            <when test="colSortName.equals('empGradeCd')">
+                ORDER BY      EMP_GRADE_CD
+            </when>
+            <when test="colSortName.equals('birthday')">
+                ORDER BY      BIRTHDAY
+            </when>
+            <when test="colSortName.equals('emailAddr')">
+                ORDER BY      EMAIL_ADDR
+            </when>
+            <when test="colSortName.equals('statusCd')">
+                ORDER BY      STATUS_CD
+            </when>
+            <when test="colSortName.equals('encoYmd')">
+                ORDER BY      ENCO_YMD
+            </when>
+            <when test="colSortName.equals('retireYmd')">
+                ORDER BY      RETIRE_YMD
+            </when>
+            <when test="colSortName.equals('empTypeCd')">
+                ORDER BY      EMP_TYPE_CD
+            </when>
+            <when test="colSortName.equals('mphonNo')">
+                ORDER BY      MPHON_NO
+            </when>
+            <when test="colSortName.equals('regrId')">
+                ORDER BY      REGR_ID
+            </when>
+            <when test="colSortName.equals('regDt')">
+                ORDER BY      REG_DT
+            </when>
+            <when test="colSortName.equals('amdrId')">
+                ORDER BY      AMDR_ID
+            </when>
+            <when test="colSortName.equals('amdDt')">
+                ORDER BY      AMD_DT
+            </when>
+            <otherwise>
+                ORDER BY      REG_DT
+            </otherwise>
+        </choose>
+        <if test="colSortName !=null and colSortDir !='' and colSortDir !=null and colSortDir !='' and colSortDir.equals('desc')">
+            DESC
+        </if>
+    </sql>
+    <select id="selectListCount" resultType="int">
+                SELECT /* com.kspo.voc.batch.dao.EmpBasDao.selectListCount */ COUNT(1)
+                 FROM TB_SYS_EMP_BAS A
+        <include refid="sqlConditions"/>
+    </select>
+    <select id="selectList" resultType="com.kspo.voc.batch.model.EmpBasVo">
+               SELECT /* com.kspo.voc.batch.dao.EmpBasDao.selectList */ <include refid="sqlSelectCols"/>
+                 FROM TB_SYS_EMP_BAS A
+        <include refid="sqlConditions"/>
+              ORDER BY EMP_ID
+    </select>
+    <select id="select" resultType="com.kspo.voc.batch.model.EmpBasVo">
+               SELECT /* com.kspo.voc.batch.dao.EmpBasDao.select */ <include refid="sqlSelectCols"/>
+                 FROM TB_SYS_EMP_BAS A
+        <include refid="sqlPkConditions"/>
+    </select>
+    <select id="selectEmpOrg" resultType="com.kspo.voc.batch.model.EmpBasVo">
+               SELECT /* com.kspo.voc.batch.dao.EmpBasDao.selectEmpOrg */ <include refid="sqlSelectCols"/>
+                 FROM TB_SYS_EMP_BAS A
+                WHERE EMP_ID = #{empId}
+                  AND ORG_ID = #{orgId}
+    </select>
+    <insert id="insert">
+        <selectKey order="BEFORE" keyProperty="empOrgId" resultType="String">
+            SELECT FN_VOC_AUTO_SEQ('EO') FROM DUAL 
+        </selectKey>
+        
+                INSERT /* com.kspo.voc.batch.dao.EmpBasDao.insert */ INTO TB_SYS_EMP_BAS (
+        <include refid="sqlCols"/>
+                 ) VALUES (
+                       #{empOrgId}
+                     , #{empId}
+                     , #{orgId}
+                     , NVL(#{cncrtYn},'N')
+                     , #{empNm}
+                     , #{cmpCd}
+                     , #{jobId}
+                     , #{dutyCd}
+                     , #{telNo}
+                     , #{empGradeCd}
+                     , #{birthday}
+                     , #{emailAddr}
+                     , #{statusCd}
+                     , #{encoYmd}
+                     , #{retireYmd}
+                     , #{empTypeCd}
+                     , #{mphonNo}
+                     , #{regrId}
+                     , SYSDATE
+                     , #{amdrId}
+                     , SYSDATE
+                 )
+    </insert>
+    <update id="update">
+               UPDATE /* com.kspo.voc.batch.dao.EmpBasDao.update */ TB_SYS_EMP_BAS
+                  SET EMP_ID                                  =         #{empId}
+                    , ORG_ID                                  =         #{orgId}
+                    , CNCRT_YN                                =         NVL(#{cncrtYn},'N')
+                    , EMP_NM                                  =         #{empNm}
+                    , CMP_CD                                  =         #{cmpCd}
+                    , JOB_ID                                  =         #{jobId}
+                    , DUTY_CD                                 =         #{dutyCd}
+                    , TEL_NO                                  =         #{telNo}
+                    , EMP_GRADE_CD                            =         #{empGradeCd}
+                    , BIRTHDAY                                =         #{birthday}
+                    , EMAIL_ADDR                              =         #{emailAddr}
+                    , STATUS_CD                               =         #{statusCd}
+                    , ENCO_YMD                                =         #{encoYmd}
+                    , RETIRE_YMD                              =         #{retireYmd}
+                    , EMP_TYPE_CD                             =         #{empTypeCd}
+                    , MPHON_NO                                =         #{mphonNo}
+                    , AMDR_ID                                 =         #{amdrId}
+                    , AMD_DT                                  =         SYSDATE
+        <include refid="sqlPkConditions"/>
+    </update>
+    <delete id="delete">
+               DELETE /* com.kspo.voc.batch.dao.EmpBasDao.delete */
+                 FROM TB_SYS_EMP_BAS
+        <include refid="sqlPkConditions"/>
+    </delete>
+    
+    <delete id="deleteNotTmp">
+               DELETE /* com.kspo.voc.batch.dao.EmpBasDao.delete */
+                 FROM TB_SYS_EMP_BAS
+                WHERE (EMP_ID,ORG_ID) NOT IN ( SELECT USER_ID,BUSECD FROM TMP_CODE_001 )
+                  AND ( SELECT COUNT(1) CNT FROM TMP_CODE_001) > 0
+    </delete>
+    <select id="selectTmpList" resultType="com.kspo.voc.batch.model.EmpBasVo">
+               SELECT /* com.kspo.voc.batch.dao.EmpBasDao.selectTmpList */ A.INPUT_YMD           REG_DT                   /*입력일자        */
+                    , A.USER_ID             EMP_ID        /*사번        */
+                    , A.USERLOG_ID          LOGIN_ID          /*로그인아이디        */
+                    , A.USER_PASSWORD       LOGIN_PWD           /*로그인패스워드        */
+                    , A.USER_NAME          EMP_NM          /*사원명        */
+                    , A.USER_TITLENAME                    /*직위명        */
+                    , A.USER_TEL           TEL_NO         /*전화번호        */
+                    , A.USER_CELLTEL        MPHON_NO            /*휴대전화번호        */
+                    , A.EMAIL_ID          EMAIL_ADDR          /*이메일        */
+                    , A.BONBU                    /*본부명        */
+                    , A.PARENT_BUSECD                    /*상급부서코드        */
+                    , A.DEPT_NAME                    /*부서명        */
+                    , A.BUSECD                ORG_ID    /*부서코드        */
+                    , A.GROUP_INDENT                    /*부서레벨        */
+                    , DECODE(A.USER_RETIRED,'Y','30','10')          STATUS_CD          /*퇴사여부        */
+                    , A.USER_TITLE         EMP_GRADE_CD           /*직위코드        */
+                    , A.USER_TITLE_CODE    EMP_TYPE_CD             /*직위코드분류        */
+                    , A.PROC_STATUS                    /*처리상태        */
+                    , A.BUSECD_ETC          ORG_CNCRT          /*겸직부서코드        */
+                    , A.DISPLAY_ORDER                    /*표시순서        */
+                    , 'N' CNCRT_YN
+                    , DECODE(B.USER_ID,NULL,'N','U') STAT
+                 FROM TMP_CODE_001 A
+                 LEFT JOIN TB_SYS_USER_BAS B ON A.USER_ID = B.USER_ID
+    </select>
+    <select id="selectTmpListCount" resultType="int">
+               SELECT  /* com.kspo.voc.batch.dao.EmpBasDao.selectTmpListCount */  COUNT(1) CNT
+                 FROM TMP_CODE_002 A
+    </select>
+       <insert id="insertLogin">
+                INSERT /* com.kspo.voc.batch.dao.EmpBasDao.insertLogin */ INTO TB_SYS_USER_BAS (
+                      USER_ID                    /*사용자ID        */
+                    , LOGIN_ID                    /*로그인ID        */
+                    , LOGIN_PWD                    /*로그인비밀번호        */
+                    , USER_NM                    /*사용자명        */
+                    , EMAIL_ADDR                    /*이메일주소        */
+                    , MPHON_NO                    /*이동전화번호        */
+                    , USER_GNDR_CD                    /*사용자성별코드        */
+                    , USER_BIRTHDAY                    /*사용자생년월일        */
+                    , PWD_AMD_DT                    /*비밀번호수정일시        */
+                    , LAST_LOGIN_DT                    /*최종로그인일시        */
+                    , PWD_EXP_DT                    /*비밀번호만료일시        */
+                    , LOGIN_FAIL_CNT                    /*로그인실패수        */
+                    , DEL_YN                    /*삭제여부        */
+                    , REG_DT                    /*등록일시        */
+                    , AMDR_ID                    /*수정자ID        */
+                    , AMD_DT                    /*수정일시        */
+                    , REGR_ID                    /*등록자ID        */
+                 ) VALUES (
+                       #{userId}
+                     , #{loginId}
+                     , #{loginPwd}
+                     , #{userNm}
+                     , #{emailAddr}
+                     , #{mphonNo}
+                     , #{userGndrCd}
+                     , #{userBirthday}
+                     , TO_DATE(#{pwdAmdDt},'YYYYMMDDHH24MISS')
+                     , TO_DATE(#{lastLoginDt},'YYYYMMDDHH24MISS')
+                     , TO_DATE(#{pwdExpDt},'YYYYMMDDHH24MISS')
+                     , #{loginFailCnt}
+                     , NVL(#{delYn},'N')
+                     , SYSDATE
+                     , #{amdrId}
+                     , SYSDATE
+                     , #{regrId}
+                 )
+    </insert>
+    
+     <update id="updateLogin">
+               UPDATE /* com.kspo.voc.batch.dao.UserBasDao.update */ TB_SYS_USER_BAS
+                  SET LOGIN_ID                                =         #{loginId}
+<!--                     , LOGIN_PWD                               =         #{loginPwd} -->
+                    , USER_NM                                 =         #{userNm}
+                    , EMAIL_ADDR                              =         #{emailAddr}
+                    , MPHON_NO                                =         #{mphonNo}
+                    , USER_GNDR_CD                            =         #{userGndrCd}
+                    , USER_BIRTHDAY                           =         #{userBirthday}
+                    , PWD_AMD_DT                              =         TO_DATE(#{pwdAmdDt},'YYYYMMDDHH24MISS')
+<!--                     , LAST_LOGIN_DT                           =         TO_DATE(#{lastLoginDt},'YYYYMMDDHH24MISS') -->
+<!--                     , PWD_EXP_DT                              =         TO_DATE(#{pwdExpDt},'YYYYMMDDHH24MISS') -->
+<!--                     , LOGIN_FAIL_CNT                          =         #{loginFailCnt} -->
+                    , DEL_YN                                  =         NVL(#{delYn},'N')
+                    , AMDR_ID                                 =         #{amdrId}
+                    , AMD_DT                                  =         SYSDATE
+                WHERE USER_ID                                 =         #{userId} 
+    </update>
+</mapper>
