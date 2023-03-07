@@ -296,9 +296,7 @@
     </insert>
     <update id="update">
                UPDATE /* com.kspo.voc.batch.dao.EmpBasDao.update */ TB_SYS_EMP_BAS
-                  SET EMP_ID                                  =         #{empId}
-                    , ORG_ID                                  =         #{orgId}
-                    , CNCRT_YN                                =         NVL(#{cncrtYn},'N')
+                  SET CNCRT_YN                                =         NVL(#{cncrtYn},'N')
                     , EMP_NM                                  =         #{empNm}
                     , CMP_CD                                  =         #{cmpCd}
                     , JOB_ID                                  =         #{jobId}
@@ -314,7 +312,8 @@
                     , MPHON_NO                                =         #{mphonNo}
                     , AMDR_ID                                 =         #{amdrId}
                     , AMD_DT                                  =         SYSDATE
-        <include refid="sqlPkConditions"/>
+                WHERE EMP_ID                                  =         #{empId}
+                  AND ORG_ID                                  =         #{orgId}
     </update>
     <delete id="delete">
                DELETE /* com.kspo.voc.batch.dao.EmpBasDao.delete */
